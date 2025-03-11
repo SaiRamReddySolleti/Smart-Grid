@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Smart India Hackathon</title>
+
+	<!-- font Awesome CDN link -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+	<!-- External CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- JQuery CDN link -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<!-- Navigation start -->
+	<nav>
+		<div style="display: flex; align-items: center;">
+			<img src="logo.jpg" class="logo" alt="SIH Logo">
+			<div>
+				<h1 style="margin: 0; font-family: 'Oranienbaum', serif; font-size: 36px;">KITSW</h1>
+			  <h2 style="margin: 0; font-family: 'VOLLKORN', serif; font-size: 24px;">Warangal</h2>
+			</div>
+		  </div>
+		  
+
+		<div class="navigation">
+			<ul>
+				<i id="menu-close" class="fas fa-times"></i>
+				<li><a href="index.html" class="active">Home</a></li>
+				<li><a href="about.html">About Us</a></li>
+				<li><a href="services.html">Services</a></li>
+				<li><a href="design.html">Design</a></li>
+				<li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+			</ul>
+
+			<img src="menu.png" id="menu-btn" alt="">
+		</div>
+	</nav>
+	<!-- Navigation ends -->
+
+
+	<!-- Hero section starts from here -->
+	<section id="home">
+		<h1 style="margin: 0; font-family: 'Oranienbaum', serif; font-size: 54px; text-shadow: 2px 2px 0 gray, -2px -2px 0 gray, 2px -2px 0 gray, -2px 2px 0 gray;">SMART GRID SERVICES</h1>
+		<p style="text-shadow: 2px 2px 0 rgb(186, 177, 177), -2px -2px 0 rgb(186, 177, 177), 2px -2px 0 rgb(186, 177, 177), -2px 2px 0 rgb(186, 177, 177);">
+			Smart grids are electricity network that use digital technologies, sensors and software to better match the supply and 
+			demand of electricity in real time while minimizing costs and maintaining the stability and reliability of the grid.
+			<br>Choose Renewable,Choose Smart
+		</p>
+		<div class="btn">
+			<a href="about.html" class="blue">Learn More</a>
+		</div>
+	</section>
+	<!-- Hero section ends from here -->
+
+
+
+	<!-- Footer section starts from here -->
+	<footer>
+		
+		<div class="footer-col">
+			<h3></h3>
+			<li><a href="#" class="active"></a></li>
+			<li><a href="#" class="active"></a></li>
+		</div>
+
+		<div class="copyright">
+			<p>
+				Copyright @ 2023 All rights reserved | This page is designed by Team 7RINGS
+			</p>
+			  
+		</div>
+	</footer>
+	<!-- Footer section ends from here -->
+
+	<script>
+		// Show menu links on burger click
+		$('#menu-btn').click(function(){
+			$('nav .navigation ul').addClass('active')
+		});
+
+		// Hide navbar on click function
+		$('#menu-close').click(function(){
+			$('nav .navigation ul').removeClass('active')
+		});
+	</script>
+</body>
+</html>

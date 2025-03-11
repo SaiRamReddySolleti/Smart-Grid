@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Smart India Hackathon</title>
+
+	<!-- font Awesome CDN link -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+	<!-- External CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- JQuery CDN link -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<!-- Navigation start -->
+	<nav>
+		<div style="display: flex; align-items: center;">
+			<img src="logo.jpg" class="logo" alt="SIH Logo">
+			<div>
+				<h1 style="margin: 0; font-family: 'Oranienbaum', serif; font-size: 36px;">KITSW</h1>
+			  <h2 style="margin: 0; font-family: 'VOLLKORN', serif; font-size: 24px;">Warangal</h2>
+			</div>
+		  </div>
+		  
+
+		<div class="navigation">
+			<ul>
+				<i id="menu-close" class="fas fa-times"></i>
+				<li><a href="index.html" >Home</a></li>
+				<li><a href="about.html">About Us</a></li>
+				<li><a href="services.html" class="active">Services</a></li>
+				<li><a href="design.html">Design</a></li>
+				<li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+			</ul>
+
+			<img src="menu.png" id="menu-btn" alt="">
+		</div>
+	</nav>
+	<!-- Navigation ends -->
+
+
+	<!-- Hero section starts from here -->
+	<section id="about-home" >
+        <h1>Services</h1>
+</section>
+	<!-- Hero section ends from here -->
+    <section id="about-container">
+        <div class="about-text">
+            <h1 align="center">Services Offered by SGaaS</h1>
+        <ul>
+          <li>
+            <h2>Smart Grid Solutions</h2>
+            <ul>
+              <li>Real-time optimization and adaptability.</li>
+              <li>Enhanced grid reliability and efficiency.</li>
+            </ul>
+          </li>
+          <li>
+            <h2>Data-Driven Insights</h2>
+            <ul>
+              <li>Actionable analytics for informed decisions.</li>
+              <li>Sustainable energy consumption patterns.</li>
+            </ul>
+          </li>
+          <li>
+            <h2>Energy Efficiency Consulting</h2>
+            <ul>
+              <li>Expert strategies for cost-effective operations.</li>
+              <li>Resource allocation optimization.</li>
+            </ul>
+          </li>
+          <li>
+            <h2>Customized Smart Solutions</h2>
+            <ul>
+              <li>Tailored SGaaS to meet unique business needs.</li>
+              <li>Scalable solutions for future growth.</li>
+            </ul>
+          </li>
+          <li>
+            <h2>24/7 Support and Maintenance</h2>
+            <ul>
+              <li>Round-the-clock support for seamless operations.</li>
+              <li>Proactive maintenance for peak performance.</li>
+            </ul>
+          </li>
+          <li>
+            <h2>Integration with Existing Infrastructure</h2>
+            <ul>
+              <li>Effortless integration with current energy systems.</li>
+              <li>Minimal disruption, maximum benefits.</li>
+            </ul>
+          </li>
+        </ul>
+        <p align="center">Choose SGaaS for innovation, sustainability and a reliable energy future.</p>
+      
+        </div>
+    </section>
+    
+
+	<!-- Footer section starts from here -->
+	<footer>
+		
+		<div class="footer-col">
+			<h3></h3>
+			<li><a href="#" class="active"></a></li>
+			<li><a href="#" class="active"></a></li>
+		</div>
+
+		<div class="copyright">
+			<p>
+				Copyright @ 2023 All rights reserved | This page is designed by Team 7RINGS
+			</p>
+			  
+		</div>
+	</footer>
+	<!-- Footer section ends from here -->
+
+	<script>
+		// Show menu links on burger click
+		$('#menu-btn').click(function(){
+			$('nav .navigation ul').addClass('active')
+		});
+
+		// Hide navbar on click function
+		$('#menu-close').click(function(){
+			$('nav .navigation ul').removeClass('active')
+		});
+	</script>
+</body>
+</html>

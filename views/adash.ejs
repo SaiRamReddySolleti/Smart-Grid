@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SGaaS Monitoring System</title>
+    <link rel="stylesheet" type="text/css" href="dstyle.css">
+</head>
+<body>
+    <header>
+        <h1>Smart Grid Monitoring System</h1>
+    </header>
+    <nav>
+        <button class="tablinks" onclick="openTab(event, 'Daily View')">Daily View</button>
+        <button class="tablinks" onclick="openTab(event, 'Monthly View')">Monthly View</button>
+        <button class="tablinks" onclick="openTab(event, 'Yearly View')">Yearly View</button>
+        <span id="userId" style="float: right;">Admin ID: <%= userId %></span>
+        <input type="hidden" id="role" value="<%= role %>">
+        <a href="/logout">Logout</a>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    var myChart1, myChart2; // Declare myChart1 and myChart2 globally
+
+    async function fetchData(userId, role, range) {
+    const response = await fetch('https://sih-sg-f7966ce85980.herokuapp.com/fetchData', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: userId, role: role, view: range }),
+    });
+    const data = await response.json();
+    
+
+    // Transform the data into a format suitable for Chart.js
+    let consumptionData, generationData, labels;
+
+if (range === 'day') {
+    // Get the last data point's date
+let lastDataPointDate = new Date(data.consumptionData[data.consumptionData.length - 1].date);
+
+// Subtract 2 hours from the last data point's date
+lastDataPointDate.setHours(lastDataPointDate.getHours() - 2);
+
+// Filter the data to include only the data points within the range
+consumptionData = data.consumptionData.filter(item => new Date(item.date) >= lastDataPointDate).map(item => item.value);
+generationData = data.generationData.filter(item => new Date(item.date) >= lastDataPointDate).map(item => item.value);
+labels = data.consumptionData.filter(item => new Date(item.date) >= lastDataPointDate).map(item => new Date(item.date).toLocaleDateString());
+
+} else if (range === 'month') {
+    consumptionData = data.consumptionData.filter((item, index) => index % 3 === 0).map(item => item.value);
+    generationData = data.generationData.filter((item, index) => index % 3 === 0).map(item => item.value);
+    labels = data.consumptionData.filter((item, index) => index % 3 === 0).map(item => new Date(item.date).toLocaleDateString());
+} else if (range === 'year') {
+    consumptionData = data.consumptionData.filter((item, index) => index % 14 === 0).map(item => item.value);
+    generationData = data.generationData.filter((item, index) => index % 14 === 0).map(item => item.value);
+    labels = data.consumptionData.filter((item, index) => index % 14 === 0).map(item => new Date(item.date).toLocaleDateString());
+}
+
+
+// Calculate averages
+let avgConsumption = consumptionData.reduce((a, b) => a + b, 0) / consumptionData.length;
+let avgGeneration = generationData.reduce((a, b) => a + b, 0) / generationData.length;
+
+
+// Adjust averages based on the selected view
+if (range === 'day') {
+    avgConsumption ;
+    avgGeneration ;
+}
+else if (range === 'month') {
+    avgConsumption *= 12;
+    avgGeneration *= 12;
+} else if (range === 'year') {
+    avgConsumption *= 30;
+    avgGeneration *= 30;
+}
+
+// Update HTML elements
+document.getElementById('avgConsumption').textContent = 'Average Consumption: ' + avgConsumption.toFixed(2) + ' kW ';
+document.getElementById('avgGeneration').textContent = 'Average Generation: ' + avgGeneration.toFixed(2) + ' kW';
+
+// Log the fetched data
+return { consumptionData, generationData, labels };
+}
+
+function openTab(event, tabName) {
+    // Fetch data based on the active view
+    var userId = document.getElementById('userId').textContent.split(': ')[1];
+    var role = document.getElementById('role').value;
+    
+    var range;
+    if (tabName === 'Daily View') {
+        range = 'day';
+    } else if (tabName === 'Monthly View') {
+        range = 'month';
+    } else if (tabName === 'Yearly View') {
+        range = 'year';
+    }
+
+    fetchData(userId,role, range).then(data => {
+        myChart1.data.labels = data.labels;
+        myChart1.data.datasets[0].data = data.consumptionData;
+        myChart1.update();
+
+        myChart2.data.labels = data.labels;
+        myChart2.data.datasets[0].data = data.generationData;
+        myChart2.update();
+
+        
+    });
+}
+
+window.onload = function() {
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    myChart1 = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: [], // Initialize with an empty array
+            datasets: [{
+                label: 'Power consumption [kW]',
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'kWh'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time line'
+                }
+            }
+        }
+        }
+    });
+    myChart2 = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: [], // Initialize with an empty array
+            datasets: [{
+                label: 'Power generation [kW]',
+                data: [],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'kWh'
+                }
+            },
+            x: {
+                title: {
+                    display: true,
+                    text: 'Time line'
+                }
+            }}
+        }
+    });
+
+    // Make 'Daily View' active on page load
+    openTab({currentTarget: document.querySelector(".tablinks")}, 'Daily View');
+}
+</script>
+
+<style>
+    .chart-container {
+        width: 70%; /* Adjust this value to change the size of the charts */
+        padding: 1em;
+    }
+</style>
+<main>
+    <section style="display: flex; justify-content: space-between;">
+        <div>
+            <h2 id="name"></h2>
+        </div>
+        <div style="flex: 1;">
+            <div class="chart-container">
+                <canvas id="myChart1"></canvas>
+            </div>
+            <div id="avgConsumption" style="text-align: center;"></div>
+        </div>
+        <div style="flex: 1;">
+            <div class="chart-container">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div id="avgGeneration" style="text-align: center;"></div>
+        </div>
+    </section>
+<section>
+        <h2 align="center">Traffic Analysis</h2>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; justify-items: center; align-items: center;">
+            <img src="t1.png" alt="Image 1">
+            <img src="t2.png" alt="Image 2">
+            <img src="t3.png" alt="Image 3">
+            <img src="t4.png" alt="Image 4">
+        </div>
+<h2 style="text-align: center;">Network Graph</h2>
+<div style="display: flex; justify-content: center;">
+    <img src="22.png" alt="Image 5" style="max-width: 100%; height: auto;">
+</div>
+    </section>
+</main>

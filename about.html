@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Smart India Hackathon</title>
+
+	<!-- font Awesome CDN link -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+
+	<!-- External CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- JQuery CDN link -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+	<!-- Navigation start -->
+	<nav>
+		<div style="display: flex; align-items: center;">
+			<img src="logo.jpg" class="logo" alt="SIH Logo">
+			<div>
+				<h1 style="margin: 0; font-family: 'Oranienbaum', serif; font-size: 36px;">KITSW</h1>
+			  <h2 style="margin: 0; font-family: 'VOLLKORN', serif; font-size: 24px;">Warangal</h2>
+			</div>
+		  </div>
+		  
+
+		<div class="navigation">
+			<ul>
+				<i id="menu-close" class="fas fa-times"></i>
+				<li><a href="index.html" >Home</a></li>
+				<li><a href="about.html"class="active">About Us</a></li>
+				<li><a href="services.html" >Services</a></li>
+				<li><a href="design.html">Design</a></li>
+				<li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+			</ul>
+
+			<img src="menu.png" id="menu-btn" alt="">
+		</div>
+	</nav>
+	<!-- Navigation ends -->
+
+
+	<!-- Hero section starts from here -->
+	<section id="about-home" >
+			<h1>About Us</h1>
+	</section>
+	<!-- Hero section ends from here -->
+
+<!-- About section starts from here -->
+<section id="about-container">
+    <div class="about-text">
+        <p text-align="center">Welcome to SGaaS, where innovation meets sustainability. We're not just a startup; we're architects of change, reshaping the energy landscape. Our mission? To provide Smart Grid As A Service that's not just smart but brilliantly intelligent.</p>
+		<br>	
+        <h2>Why SGaaS?</h2>
+			<ul>
+				<li><b>Innovation:</b> We thrive on pushing boundaries, shaping the energy curve.</li>
+				<li><b>Sustainability:</b> Our tech is not just smart; it's eco-conscious.</li>
+				<li><b>Partnership:</b> Your success is our success; we're with you every step toward a smarter, more efficient future.</li>
+			</ul>
+            <br>
+			<h3 align="center">Join us on the journey to redefine energy.</h3>
+            <br>
+			<h2>Our Team</h2>
+			<p>Our team is made up of experts in the field of energy and technology. We are passionate about creating a more sustainable future and are committed to providing our clients with the best possible service.</p>
+		
+    </div>
+</section>
+<!-- About section ends from here -->
+
+	<!-- Footer section starts from here -->
+	<footer>
+		
+		<div class="footer-col">
+			<h3></h3>
+			<li><a href="#" class="active"></a></li>
+			<li><a href="#" class="active"></a></li>
+		</div>
+
+		<div class="copyright">
+			<p>
+				Copyright @ 2023 All rights reserved | This page is designed by Team 7RINGS
+			</p>
+			  
+		</div>
+	</footer>
+	<!-- Footer section ends from here -->
+
+	<script>
+		// Show menu links on burger click
+		$('#menu-btn').click(function(){
+			$('nav .navigation ul').addClass('active')
+		});
+
+		// Hide navbar on click function
+		$('#menu-close').click(function(){
+			$('nav .navigation ul').removeClass('active')
+		});
+	</script>
+</body>
+</html>
